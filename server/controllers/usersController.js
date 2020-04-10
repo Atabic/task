@@ -50,7 +50,6 @@ try {
   if(!req.user.active) {
     res.status(201).json({ success: false, msg: `Your account is inactive, Contact to Administrator` });
   }
-  console.log('sign in sy chal raha hun ')
   if(req.user) {
     // Generate token
     const token = signToken(req.user);
@@ -85,7 +84,7 @@ async function updateProfile(req,res,next){
         gender:req.body.gender,
         image:req.file ? `/images/${req.file.filename}` : '/images/user.jpg'
       }
-      await User.findOneAndUpdate({_id:id},update,(error,document)=>{
+      await User.findOneAndUpdate({_id:id},update,{new:true},(error,document)=>{
         if(error){
           console.log('Error in Updating User',error)
           responseHandler(res,500,error.message);
