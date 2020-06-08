@@ -2,5 +2,5 @@
 
 module.exports = {
 
-    users : require('./usersController')
+    tree : require('./treeController')
 };
